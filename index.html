@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/lib/swiper_min.css">
+    <style>
+    html,
+      body {
+        position: relative;
+        height: 100%;
+      }
+
+      body {
+        background: #eee;
+        font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color: #000;
+        margin: 0;
+        padding: 0;
+      }
+       
+      .swiper {
+        width: 100%;
+        height: 100%;
+      }
+
+      .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+      }
+
+      .swiper-slide img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      #wrap{ position: relative; }
+      .intro{
+        position: fixed;
+        top:0;
+        left:0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        overflow: hidden;
+        z-index: 100;
+      }
+
+      .intro__textbox{
+        position: absolute;
+        top: 43.4%;
+        left: 10.4%;
+        color: #fff;
+        font-size:40px;
+        z-index: 100;
+      }
+
+      .intro__title{
+        font-size: 75px;
+        text-transform: uppercase;
+      }
+      .intro__title span{
+        width: 100%;
+        float: left;
+        color: #fff;
+        -webkit-clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 80%);
+        clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 80%);
+        transform: translateY(-50px);
+        opacity: 0;
+        animation-name: titleAnimation;
+        animation-timing-function:ease;
+        animation-duration: 3s;
+      }
+
+      .intro__title span{
+        animation-delay: 0.6s;
+        -webkit-animation-fill-mode: forwards;
+      }
+      .intro__title span:first-child{ animation-delay: 0.7s; }
+      .intro__title span:last-child{ color: #ffe221; animation-delay: 0.5s; }
+      @keyframes titleAnimation {
+          0% {
+            transform: translateY(-50px);
+            opacity: 0;
+            -webkit-clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 80%);
+            clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 80%);
+        }
+        20% {
+            transform: translateY(0);
+            opacity: 1;
+            -webkit-clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 15%);
+            clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 15%);
+        }
+        80% {
+            transform: translateY(0);
+            opacity: 1;
+            -webkit-clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 15%);
+            clip-path: polygon(100% 0, 100% 100%, 0 100%, 0 15%);
+        }
+        100% {
+            transform: translateY(50px);
+            opacity: 0;
+            -webkit-clip-path: polygon(100% 0, 100% -0%, 0 100%, 0 100%);
+            clip-path: polygon(100% 0, 100% -0%, 0 100%, 0 100%);
+          
+        }
+      }
+
+      .intro__cover{
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        background: #1e90ff;
+        -moz-transform: translateX(100%);
+        -ms-transform: translateX(100%);
+        -webkit-transform: translateX(100%);
+        transform: translateX(100%);
+      }
+
+      main{ position: relative; overflow: hidden;}
+      .mySwiper{ height: 100vh; background: #fff; overflow: hidden;}
+      .mySwiper .swiper-container{ height: inherit;}
+      .swiper-slide a{ display: block; }
+      header{ display: none;}
+      .slider_content{ display: table; overflow: hidden; width: 100%; height: 100%; }
+      .slider_content .slider_inner{
+          display: table;
+          vertical-align: middle;
+          text-align: left;
+          position: absolute;
+          bottom: 23%;
+          left: 15.5%;
+       }
+       .slider_content .slider_text{
+          position: relative;
+          z-index: 10;
+          text-transform: uppercase;
+       }
+       .slider_content .slider_title{ margin-bottom: 22px;}
+       .slider_content .slider_title a{
+          display: inline-block;
+          font-size: 80px;
+          color: #2b2b2b;
+          line-height: 72px;
+          letter-spacing: -4.5px;
+       }
+
+       .slider_content .slider_title a em{
+          display: inline-block;
+          -webkit-transform: scaleX(0.9);
+          -moz-transform: scaleX(0.9);
+          transform: scaleX(0.9);
+          transform-origin: top left;
+          word-break: keep-all;
+       }
+
+       .slider_content .slider_progress{
+          position: relative;
+          margin:0 0 30px 5px;
+          width: 360px;
+          height: 2px;
+          background: #eee;
+       }
+       .slider_content .slider_progress:before{
+         content: '';
+         display: block;
+         width: 360px;
+         height: 2px;
+         background: #2b2b2b;
+         opacity: .2;
+       } 
+
+       .slider_content .slider_progress .progress{
+         position: absolute;
+         top:0; left:0; width:0; height: 2px; background: #fff; opacity: 1;
+       } 
+
+       .slider_content .slide_desc{
+         margin-bottom: 14px; font-size:24px; color: #2b2b2b; line-height: 17px;
+       }
+       .slider_content .slide_desc .slider_client{
+         display: inline-block; margin-right: -10px; font-weight: 300;
+       }
+       .slider_content .slide_desc .slider_client-font{
+        display:inline-block;letter-spacing:0.5px;-webkit-transform:scaleX(0.8);-moz-transform:scaleX(0.8);transform:scaleX(0.8);transform-origin:top left;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+      <div class="intro">
+          <div class="intro__textbox">
+            <h1 class="intro__title">
+              <span>Hi, nice</span>
+              <span>to see</span>
+              <span>you here</span>
+            </h1>
+          </div>
+          <div class="intro__cover"></div>
+      </div>
+      <header>
+        <a href="javascript:;">New</a>
+        <div class="gnb">
+          <a href="javascript:;">
+            <span></span>
+            <span></span>
+            <span></span>
+          </a>
+        </div>
+      </header>
+      <main>
+        <div class="slider_content">
+          <div class="slider_inner">
+            <div class="slider_text">
+              <div class="slider_title">
+                <a href="javascript:;">
+                  <em>iloom PLACER Online Showroom</em>
+                </a>
+              </div>
+              <div class="slider_progress">
+                <div class="progress"></div>
+              </div>
+              <div class="slide_desc">
+                <span class="slider_client">
+                  <span class="slider_client-font"></span>
+                  </span>
+                <span class="slider_type"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="swiper mySwiper">
+          <div class="swiper-container">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <a href="javascript:;">
+                  <video id="mainvideo10" autoplay="autoplay" loop="" muted="" playsinline="" preload="metadata" poster="./images/portfolio/lg_ibs/visual_lg_ibs.jpg?ver=0" style="min-width:100%; min-height:100%; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%);">
+                    <source src="http://www.newturngroup.com/images/portfolio/lg_ibs/visual_lg_ibs.mp4?ver=0" type="video/mp4">
+                  </video>
+                </a>
+              </div>
+              <div class="swiper-slide">
+                <video id="mainvideo10" autoplay="autoplay" loop="" muted="" playsinline="" preload="metadata" poster="./images/portfolio/lg_ibs/visual_lg_ibs.jpg?ver=0" style="min-width:100%; min-height:100%; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%);">
+                  <source src="http://www.newturngroup.com/images/portfolio/iloom/visual_iloom.mp4?ver=20112301" type="video/mp4">
+                </video>
+              </div>
+              <div class="swiper-slide">
+                <video id="mainvideo10" autoplay="autoplay" loop="" muted="" playsinline="" preload="metadata" poster="./images/portfolio/lg_ibs/visual_lg_ibs.jpg?ver=0" style="min-width:100%; min-height:100%; position:absolute; top:50%; left:50%; transform:translate(-50%, -50%);">
+                  <source src="http://www.newturngroup.com/images/portfolio/lg_velvet/visual_lg_velvet.mp4?ver=20061001" type="video/mp4">
+                </video>
+              </div>
+            </div>
+
+          </div>
+  
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </main>
+
+    </div>
+    <script src="js/lib/jquery.js"></script>
+    <script src="js/lib/swiper.js"></script>
+    <script src="js/lib/gsap.min.js"></script>
+    <script>
+      var _mainSwiperList = [];
+      function create(){
+        console.log( "create" );
+      }        
+
+      function addEvent(){
+        //첫 진입시 인트로 체크
+        var checkCookie = getCookie("introCookie");
+        if( checkCookie != 'introShow' ){
+          introShow();
+        }else{
+          $( ".intro" ).remove();
+        }
+
+        mainSwiperInit();
+      }
+    
+      function setCookie(name, value, expiredays){
+        var today = new Date();
+        // 현재시간에 하루를 더함 
+        today.setDate(today.getDate() + expiredays);
+        document.cookie = name + '=' + escape(value) + '; expires=' + today.toGMTString();
+      }
+        
+      function getCookie(name) {
+        var cookie = document.cookie;
+        if (document.cookie != "") {
+          var cookie_array = cookie.split("; ");
+          for ( var index in cookie_array) {
+            var cookie_name = cookie_array[index].split("=");
+            if (cookie_name[0] == "introCookie") {
+              return cookie_name[1];
+            }
+          }
+        }
+        return;
+      }
+      function introShow(){
+        var intro = $( ".intro" );
+        var introCover = $( ".intro__cover" );
+        var masterTL = new TimelineMax({paused:true});
+        function timeline1(){
+          var tl1 = new TimelineMax();  
+            tl1.to( introCover, 1.75, {  x: "0", ease:Circ.easeInOut, delay:2.8 })
+            tl1.to( introCover, 1, {  x: "-100%", ease:Circ.easeInOut })
+            return tl1;
+        }
+        function timeline2(){
+          var tl2 = new TimelineMax();  
+            tl2.to( intro, 1, {  x: "-100%", ease:Circ.easeInOut,  onComplete: setCookie("introCookie", 'introShow', 1) })
+            return tl2;
+        }
+        masterTL.add(timeline1()).add(timeline2()).progress(1).progress(0).play();
+      
+      }
+
+      function mainSwiperInit(){
+        var mySwiper = new Swiper ('.swiper-container', {
+            slidesPerView : 'auto',
+            // autoplay: true,
+            loop: true,
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            pagination: {
+              el: ".swiper-pagination",
+              type: "fraction",
+            },
+            on: {
+                init: function(){
+                  
+
+                },
+                activeIndexChange: function(){
+                  var index = this.realIndex;
+                  console.log( index ); 
+
+                  // gsap.set()
+                }
+            },
+        });
+      }
+
+
+
+      function init(){
+        create();
+        addEvent();
+      }
+
+      $(document).ready( function(){
+        init();
+      })
+    
+    </script>
+</body>
+</html>
