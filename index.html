@@ -63,7 +63,7 @@
         height: 100%;
         background: #000;
         overflow: hidden;
-        z-index: 100;
+        z-index: 1000;
       }
 
       .intro__textbox{
@@ -659,7 +659,7 @@
 
       function addEvent(){
         //첫 진입시 인트로 체크
-        var checkCookie = getCookie("introCookie");
+        var checkCookie = getCookie("introCookie"); 
         if( checkCookie != 'introShow' ){
           introShow();
         }else{
